@@ -12,4 +12,21 @@
 
     </ListView>
 
+    <TextView
+        android:id="@+id/emptyTextView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:text="Your downloads will appear here."
+        android:textAlignment="center"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/downloadedNewsListView"
+        app:layout_constraintStart_toStartOf="@+id/downloadedNewsListView"
+        app:layout_constraintTop_toTopOf="@+id/downloadedNewsListView"
+        android:visibility="invisible"/>
+
 </android.support.constraint.ConstraintLayout>
