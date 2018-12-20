@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">News Reader</string>
+    <string name="title_activity_downloaded_url_loader">downloadedUrlLoader</string>
 </resources>

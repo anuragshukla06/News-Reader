@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.anuragshukla.newsreader">
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -18,7 +18,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ArticleUrlLoader"></activity>
+        <activity android:name=".ArticleUrlLoader" android:label="Article" />
+        <activity android:name=".DownloadedNewsActivity" android:label="Downloads"/>
+        <activity
+            android:name=".downloadedUrlLoader"
+            android:label="Offline Viewing"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -2,15 +2,20 @@ package com.example.anuragshukla.newsreader;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -28,6 +33,31 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> newsUrlArrayList = new ArrayList<>();
     ArrayList<String> newsTitleArrayList = new ArrayList<String>();
     ArrayAdapter<String> arrayAdapter;
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.downloaded_news_menu, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+        switch (item.getItemId()){
+            case R.id.downloads:
+                Intent intent = new Intent(getApplicationContext(), DownloadedNewsActivity.class);
+                startActivity(intent);
+                break;
+
+            default:
+                Toast.makeText(getApplicationContext(), "Something Went Wrong", Toast.LENGTH_SHORT).show();
+        }
+        return true;
+    }
 
     class NewsLoader extends AsyncTask<String, String, String> {
 
@@ -126,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
         newsListView = findViewById(R.id.newsListView);
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, newsTitleArrayList);
         newsListView.setAdapter(arrayAdapter);
+        ArticleUrlLoader.articleDB = this.openOrCreateDatabase("Articles", Context.MODE_PRIVATE, null);
         loadNews();
 
         newsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -133,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int index, long id) {
                 Intent intent = new Intent(getApplicationContext(), ArticleUrlLoader.class);
                 intent.putExtra("Url", newsUrlArrayList.get(index));
+                intent.putExtra("Title", newsTitleArrayList.get(index));
                 startActivity(intent);
 
             }
